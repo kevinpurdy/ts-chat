@@ -17,15 +17,16 @@ A terminal-based chat application built in Go. The chat server allows multiple u
 
 ## Installation
 
+### Clone the repository
 ```bash
-# Clone the repository
-git clone https://github.com/bscott/ts-chat.git
-cd ts-chat
-
-# Build the binary
+git clone https://github.com/bscott/ts-chat.git && cd ts-chat
+```
+### Build the binary
+```bash
 go build -o chat-server ./cmd/ts-chat
-
-# Or use the provided Makefile
+```
+### Or use the provided Makefile
+```bash
 make
 ```
 
@@ -35,11 +36,14 @@ make
 
 Run the server in regular TCP mode (accessible only on the local network):
 
-```bash
-# Run with default settings
-./chat-server
 
-# Run with custom settings
+#### Run with default settings
+```bash
+./chat-server
+```
+
+#### Run with custom settings
+```bash
 ./chat-server --port 2323 --room-name "My Chat Room" --max-users 20
 ```
 
@@ -47,11 +51,13 @@ Run the server in regular TCP mode (accessible only on the local network):
 
 Run the server in Tailscale mode (accessible over your Tailnet):
 
+#### Set your Tailscale auth key
 ```bash
-# Set your Tailscale auth key
 export TS_AUTHKEY=tskey-your-auth-key-here
+```
 
-# Run with Tailscale mode enabled
+#### Run with Tailscale mode enabled
+```bash
 ./chat-server --tailscale --hostname mychat --room-name "Tailscale Chat" --port 2323
 ```
 
@@ -80,34 +86,44 @@ To use Tailscale mode, you need to provide an auth key:
 
 ### Docker usage:
 
+
+#### Build the Docker image
 ```bash
-# Build the Docker image
 docker build -t chat-server .
+```
 
-# Run in regular mode
+#### Run in regular mode
+```bash
 docker run -p 2323:2323 chat-server
+```
 
-# Run in Tailscale mode
+#### Run in Tailscale mode
+```bash
 docker run -e TS_AUTHKEY=tskey-your-auth-key-here chat-server --tailscale --hostname dockerchat
 ```
 
 ### Connecting to the chat:
 
 #### Regular mode:
-```bash
-# Connect via Netcat
-nc localhost 2323
 
-# Or Telnet
+##### Connect via Netcat
+```bash
+nc localhost 2323
+```
+
+##### Or Telnet
+```bash
 telnet localhost 2323
 ```
 
 #### Tailscale mode:
+##### Connect via Netcat (replace 'hostname' with your specified hostname)
 ```bash
-# Connect via Netcat (replace 'hostname' with your specified hostname)
 nc hostname.ts.net 2323
+```
 
-# Or Telnet
+##### Or Telnet
+```bash
 telnet hostname.ts.net 2323
 ```
 
